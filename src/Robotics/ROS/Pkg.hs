@@ -1,6 +1,6 @@
 module Robotics.ROS.Pkg
-  ( packageList
-  , package
+  ( package
+  , packageList
   , PackageMeta(..)
   , Package(..)
   , PkgName
@@ -13,21 +13,24 @@ import System.FilePath (joinPath)
 import Data.List.Split (splitOn)
 import Data.Maybe (listToMaybe)
 import Data.Either (rights)
+import Data.Text (unpack)
 
 import Robotics.ROS.Pkg.Parser
 import Robotics.ROS.Pkg.Types
 
--- |Take a full package list
-packageList :: IO [Package]
-packageList = do
-    paths <- splitOn ":" <$> getEnv "ROS_PACKAGE_PATH"
-    concat <$> mapM search paths
-  where package_xml b d = joinPath [b, d, "package.xml"]
-        search d = do
-            candidates <- fmap (package_xml d) <$> getDirectoryContents d
-            rights <$> mapConcurrently parse candidates
-
 -- |Take a package by name
 package :: PkgName -> IO (Maybe Package)
-package name = listToMaybe . filter comp <$> packageList
-  where comp p = pkgName (meta p) == name
+package name = listToMaybe <$> find (const (return [unpack name])) 
+
+-- |Take a full package list
+packageList :: IO [Package]
+packageList = find getDirectoryContents
+
+-- |Take a package list with content getter 
+find :: (FilePath -> IO [FilePath]) -> IO [Package] 
+find content = do
+    paths <- splitOn ":" <$> getEnv "ROS_PACKAGE_PATH"
+    concat <$> mapM go paths
+  where package_xml b d = joinPath [b, d, "package.xml"]
+        go d = do candidates <- fmap (package_xml d) <$> content d
+                  rights <$> mapConcurrently parse candidates
