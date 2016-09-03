@@ -1,13 +1,13 @@
 name:                rospkg
 version:             0.1.0.0
-synopsis:            ROS package management tools 
+synopsis:            ROS package information 
 description:         Please see README.md
 homepage:            https://github.com/RobiticsHS/rospkg#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2016 Alexander Krupenkin <mail@akru.me> 
+author:              Alexander Krupenkin
+maintainer:          Alexander Krupenkin <mail@akru.me>
+copyright:           2016 Alexander Krupenkin
 category:            Robotics
 build-type:          Simple
 cabal-version:       >=1.10
@@ -15,8 +15,20 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Robotics.ROS.Pkg
-  build-depends:       base >= 4.7 && < 5
+                     , Robotics.ROS.Pkg.Parser
+  build-depends:       base         >= 4.7  && < 5
+                     , text         >= 1.2  && < 2
+                     , split        >= 0.2  && < 1
+                     , async        >= 2.1  && < 3
+                     , tagsoup      >= 0.13 && < 1
+                     , filepath     >= 1.4  && < 2
+                     , directory    >= 1.2  && < 2
+                     , bytestring   >= 0.10 && < 1
+                     , fast-tagsoup >= 1.0  && < 2
+  other-modules:       Robotics.ROS.Pkg.Types
   default-language:    Haskell2010
+  ghc-options:         -Wall
+  default-extensions:  OverloadedStrings
 
 test-suite rospkg-test
   type:                exitcode-stdio-1.0
