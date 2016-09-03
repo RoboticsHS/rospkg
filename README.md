@@ -1,5 +1,7 @@
 # ROS package system information
 
+[![Build Status](https://travis-ci.org/RoboticsHS/rospkg.svg?branch=master)](https://travis-ci.org/RoboticsHS/rospkg)
+
 ## Install
 
     $ git clone https://github.com/RoboticsHS/rospkg
