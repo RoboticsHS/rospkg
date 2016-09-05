@@ -1,5 +1,5 @@
 name:                rospkg
-version:             0.1.0.0
+version:             0.2.0.0
 synopsis:            ROS package system information 
 description:         Please see README.md
 homepage:            https://github.com/RobiticsHS/rospkg#readme
