@@ -32,7 +32,9 @@ library
                      , directory    >= 1.2  && < 2
                      , bytestring   >= 0.10 && < 1
                      , fast-tagsoup >= 1.0  && < 2
-  other-modules:       Robotics.ROS.Pkg.Types
+  other-modules:       Robotics.ROS.Pkg.Finder
+                     , Robotics.ROS.Pkg.Types
+                     , Robotics.ROS.Pkg.Msgs
   default-language:    Haskell2010
   ghc-options:         -Wall
   default-extensions:  OverloadedStrings
