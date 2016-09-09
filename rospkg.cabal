@@ -1,8 +1,8 @@
 name:                rospkg
-version:             0.2.2.0
+version:             0.2.2.1
 synopsis:            ROS package system information 
 description:         Please see README.md
-homepage:            https://github.com/RobiticsHS/rospkg#readme
+homepage:            https://github.com/RoboticsHS/rospkg#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Alexander Krupenkin
