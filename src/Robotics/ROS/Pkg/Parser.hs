@@ -1,3 +1,16 @@
+-- |
+-- Module      :  Robotics.ROS.Pkg.Parser
+-- Copyright   :  Alexander Krupenkin 2016
+-- License     :  BSD3
+--
+-- Maintainer  :  mail@akru.me
+-- Stability   :  experimental
+-- Portability :  POSIX / WIN32
+--
+-- This module contains simple 'TagSoup' based XML parser.
+-- It used for parsing @package.xml@ file with common
+-- ROS package information.
+--
 module Robotics.ROS.Pkg.Parser (parse) where
 
 import Data.ByteString as BS (readFile)
@@ -10,7 +23,7 @@ import Text.StringLike
 
 import Robotics.ROS.Pkg.Types
 
--- |Parse package.xml file
+-- | Parse package.xml file
 parse :: FilePath -> IO (Either String Package)
 parse pkgFile = do
     exist <- doesFileExist pkgFile
@@ -20,7 +33,7 @@ parse pkgFile = do
             return (Package pkgDir <$> packageMeta content)
   where pkgDir = takeDirectory pkgFile
 
--- |Tag-based parser
+-- | Tag-based parser
 packageMeta :: [Tag Text] -> Either String PackageMeta
 packageMeta tags =
     PackageMeta <$> takeText "name"
@@ -38,7 +51,7 @@ packageMeta tags =
                                 r' <- sliceN xs n
                                 return (r : r')
 
--- |Slice tags from Open-tag to Close-tag with same name
+-- | Slice tags from Open-tag to Close-tag with same name
 slice' :: StringLike a => [Tag a] -> a -> Either String ([Tag a], [Tag a])
 slice' tags tagName | length sliceTags > 0 = Right (freeTags, sliceTags) 
                     | otherwise = Left $ "Not found tag name: "
