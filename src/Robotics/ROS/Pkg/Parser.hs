@@ -11,17 +11,28 @@
 -- It used for parsing @package.xml@ file with common
 -- ROS package information.
 --
+{-# LANGUAGE CPP #-}
 module Robotics.ROS.Pkg.Parser (parse) where
 
+import Text.StringLike (StringLike, toString)
 import Data.ByteString as BS (readFile)
 import System.Directory (doesFileExist)
 import System.FilePath (takeDirectory)
-import Text.HTML.TagSoup.Fast
 import Text.HTML.TagSoup
 import Data.Text (Text)
-import Text.StringLike
 
 import Robotics.ROS.Pkg.Types
+
+#ifdef FAST_PARSER
+import Text.HTML.TagSoup.Fast
+#else
+import Data.Text.Encoding (decodeUtf8)
+import Data.ByteString (ByteString)
+
+-- | Parse with default UTF8 encoding
+parseTagsT :: ByteString -> [Tag Text]
+parseTagsT = fmap (fmap decodeUtf8) . parseTags
+#endif
 
 -- | Parse package.xml file
 parse :: FilePath -> IO (Either String Package)

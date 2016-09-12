@@ -1,5 +1,5 @@
 name:                rospkg
-version:             0.2.2.1
+version:             0.2.3.0
 synopsis:            ROS package system information 
 description:         Please see README.md
 homepage:            https://github.com/RoboticsHS/rospkg#readme
@@ -31,13 +31,17 @@ library
                      , filepath     >= 1.4  && < 2
                      , directory    >= 1.2  && < 2
                      , bytestring   >= 0.10 && < 1
-                     , fast-tagsoup >= 1.0  && < 2
   other-modules:       Robotics.ROS.Pkg.Finder
                      , Robotics.ROS.Pkg.Types
                      , Robotics.ROS.Pkg.Msgs
   default-language:    Haskell2010
   ghc-options:         -Wall
   default-extensions:  OverloadedStrings
+
+  if !os(windows)
+    -- Using fast-tagsoup (avg 200% speedup)
+    build-depends:     fast-tagsoup >= 1.0  && < 2
+    cpp-options:       -DFAST_PARSER
 
 test-suite rospkg-test
   type:                exitcode-stdio-1.0
