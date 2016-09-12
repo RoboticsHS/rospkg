@@ -1,6 +1,7 @@
 # ROS package system information
 
 [![Build Status](https://travis-ci.org/RoboticsHS/rospkg.svg?branch=master)](https://travis-ci.org/RoboticsHS/rospkg)
+[![Build status](https://ci.appveyor.com/api/projects/status/tomd0oe3oikya0xb?svg=true)](https://ci.appveyor.com/project/akru/rospkg)
 
 ## Install
 
