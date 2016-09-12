@@ -7,8 +7,6 @@ build: off
 before_test:
 - curl -sS -ostack.zip -L --insecure http://www.stackage.org/stack/windows-i386
 - 7z x stack.zip stack.exe
-- curl -sS -oicu.zip -L --insecure http://nebm.ist.utl.pt/~glopes/misc/intl_win/ICU-51.2-dlls.zip
-- 7z x icu.zip -y
 
 clone_folder: "c:\\stack"
 environment:
@@ -17,6 +15,8 @@ environment:
 
 test_script:
 - stack setup > nul
+- pacman -Sy
+- pacman -S icu
 # The ugly echo "" hack is to avoid complaints about 0 being an invalid file
 # descriptor
 - echo "" | stack --no-terminal test
