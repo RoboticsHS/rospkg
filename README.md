@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/RoboticsHS/rospkg.svg?branch=master)](https://travis-ci.org/RoboticsHS/rospkg)
 [![Build status](https://ci.appveyor.com/api/projects/status/tomd0oe3oikya0xb?svg=true)](https://ci.appveyor.com/project/akru/rospkg)
+![Hackage](https://img.shields.io/hackage/v/rospkg.svg)
+![Hackage Dependencies](https://img.shields.io/hackage-deps/v/rospkg.svg)
+![Haskell Programming Language](https://img.shields.io/badge/language-Haskell-blue.svg)
+![BSD3 License](http://img.shields.io/badge/license-BSD3-brightgreen.svg)
 
 ## Install
 
